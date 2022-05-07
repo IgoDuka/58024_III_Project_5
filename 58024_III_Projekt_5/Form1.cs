@@ -22,6 +22,7 @@ namespace _58024_III_Projekt_5
         List<int> F_bottomEdge = new List<int>();
         List<int> B_upperEdge = new List<int>();
         List<int> B_bottomEdge = new List<int>();
+
         public Form1()
         {
             InitializeComponent();
