@@ -17,7 +17,7 @@ namespace _58024_III_Projekt_5
         // and also the winning condition ought to be customizable
         int winningCondition = 6;
         // because there is no reason to create edges of the board each time a button is clicked
-        // we make a lists for them at the initialization of the board
+        // we make lists for them at the initialization of the board
         List<int> F_upperEdge = new List<int>();
         List<int> F_bottomEdge = new List<int>();
         List<int> B_upperEdge = new List<int>();
@@ -35,46 +35,38 @@ namespace _58024_III_Projekt_5
             for (int i = 1; i <= boardSize; i++)
             {
                 F_bottomEdge.Add(boardSize * (boardSize - 1) + i); // bottom
-                F_bottomEdge.Add(boardSize * (i - 1) + 1);                  // left
-                F_upperEdge.Add(i);                                                  // upper
-                F_upperEdge.Add(i * boardSize);                             // right
+                F_bottomEdge.Add(boardSize * (i - 1) + 1);         // left
+                F_upperEdge.Add(i);                                // upper
+                F_upperEdge.Add(i * boardSize);                    // right
 
                 B_bottomEdge.Add(boardSize * (boardSize - 1) + i); // bottom
-                B_upperEdge.Add(boardSize * (i - 1) + 1);                   // left
-                B_upperEdge.Add(i);                                                  // upper
-                B_bottomEdge.Add(i * boardSize);                            // right
+                B_upperEdge.Add(boardSize * (i - 1) + 1);          // left
+                B_upperEdge.Add(i);                                // upper
+                B_bottomEdge.Add(i * boardSize);                   // right
             }
         }
         private void ButtonClick(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            
-            if (checker == false)
-            {
-                btn.Text = "O";
-                btn.Enabled = false;
-                nowToMove.Text = "X";
-                Score(btn);
-                checker = true;
-            }
-            else
-            {
-                btn.Text = "X";
-                btn.Enabled = false;
-                nowToMove.Text = "O";
-                Score(btn);
-                checker = false;
-            }
+            Button but = sender as Button;
+            FillButtonTextField();
+            FillNowToMoveTextField();
+            but.Enabled = false;
+            Score(but);
+            FlipTheChecker();
+
+            void FillButtonTextField() => _ = checker == false ? but.Text = "O" : but.Text = "X";
+            void FillNowToMoveTextField() => _ = checker == false ? nowToMove.Text = "X" : nowToMove.Text = "O";
+            void FlipTheChecker() => _ = checker == false ? checker = true : checker = false;
         }
         private void Score(Button but)
         {
-            Counting(GetHorizontal(but));
-            Counting(GetVertical(but));
-            Counting(GetForwardDiagonal(but));
-            Counting(GetBackwardDiagonal(but));
-            CheckingForDraw();
+            Count(ButtonsLyingOnTheSameRowAs(but));
+            Count(ButtonsLyingOnTheSameColumnAs(but));
+            Count(ButtonsLyingOnTheForwardDiagonalWith(but));
+            Count(ButtonsLyingOnTheBackwardDiagonalWith(but));
+            CheckForDraw();
         }
-        private void Counting(List<Control> list)
+        private void Count(List<Control> list)
         {
             if (checker) CountXs(list);
             else CountOs(list);
@@ -90,16 +82,17 @@ namespace _58024_III_Projekt_5
                     if (c.Text == "X")
                     {
                         count++;
-                        if (count == winningCondition)
-                        {
-                            score_X.Text = (int.Parse(score_X.Text) + 1).ToString();
-                            MessageBox.Show("Gratuluacje! Gracz X zwyciężył!");
-                            foreach (Button button in this.panel1.Controls) { button.Enabled = false; }
-                            isThereAWinner = true;
-                        }
+                        if (count == winningCondition) PlayerXHasWon();
                     }
                     else count = 0;
                 }
+            }
+            void PlayerXHasWon()
+            {
+                score_X.Text = (int.Parse(score_X.Text) + 1).ToString();
+                MessageBox.Show("Gratuluacje! Gracz X zwyciężył!");
+                foreach (Button button in this.panel1.Controls) { button.Enabled = false; }
+                isThereAWinner = true;
             }
         }
         private void CountOs(List<Control> list)
@@ -113,19 +106,20 @@ namespace _58024_III_Projekt_5
                     if (c.Text == "O")
                     {
                         count++;
-                        if (count == winningCondition)
-                        {
-                            score_O.Text = (int.Parse(score_O.Text) + 1).ToString();
-                            MessageBox.Show("Gratuluacje! Gracz O zwyciężył!");
-                            foreach (Button button in this.panel1.Controls) { button.Enabled = false; }
-                            isThereAWinner = true;
-                        }
+                        if (count == winningCondition) PlayerOHasWon();
                     }
                     else count = 0;
                 }
             }
+            void PlayerOHasWon()
+            {
+                score_O.Text = (int.Parse(score_O.Text) + 1).ToString();
+                MessageBox.Show("Gratuluacje! Gracz O zwyciężył!");
+                foreach (Button button in this.panel1.Controls) { button.Enabled = false; }
+                isThereAWinner = true;
+            }
         }
-        private List<Control> GetHorizontal(Button but)
+        private List<Control> ButtonsLyingOnTheSameRowAs(Button but)
         {
             // to create a list of Buttons lying on the same row as 'but'
             List<int> horizontals = new List<int>();
@@ -137,19 +131,20 @@ namespace _58024_III_Projekt_5
             }
             return new List<Control>(GetMatches(horizontals));
         }
-        private List<Control> GetVertical(Button but)
+        private List<Control> ButtonsLyingOnTheSameColumnAs(Button but)
         {
             // to create a list of Buttons lying on the same column as 'but'
             List<int> vertical = new List<int>();
             int buttonPicked = int.Parse(but.Name.Substring((4)));
             int columnNumber = buttonPicked % boardSize;
+            _ = columnNumber == 0 ? columnNumber = 10 : columnNumber;
             for (int i = 0; i  < boardSize; i ++)
             {
                 vertical.Add((i *boardSize)+columnNumber);
             }
             return new List<Control>(GetMatches(vertical));
         }
-        private List<Control> GetForwardDiagonal(Button but)
+        private List<Control> ButtonsLyingOnTheForwardDiagonalWith(Button but)
         {
             List<int> numbersOnDiagonal = new List<int>();
             int buttonPicked = int.Parse(but.Name.Substring(4));
@@ -173,7 +168,7 @@ namespace _58024_III_Projekt_5
             numbersOnDiagonal.Sort();
             return new List<Control> (GetMatches(numbersOnDiagonal));
         }
-        private List<Control> GetBackwardDiagonal(Button but)
+        private List<Control> ButtonsLyingOnTheBackwardDiagonalWith(Button but)
         {
             List<int> numbersOnDiagonal = new List<int>();
             int buttonPicked = int.Parse(but.Name.Substring(4));
@@ -185,10 +180,8 @@ namespace _58024_III_Projekt_5
                 numbersOnDiagonal.Add(toBeAdded);
                 count++;
             }
-
             count = 0;
             toBeAdded = buttonPicked;
-
             while (!B_upperEdge.Contains(toBeAdded))
             {
                 toBeAdded = buttonPicked - (count * boardSize) - (count * 1);
@@ -210,7 +203,7 @@ namespace _58024_III_Projekt_5
             }
             return matchedButtons;
         }
-        private void CheckingForDraw()
+        private void CheckForDraw()
         {
             if (!isThereAWinner)
             {
@@ -222,12 +215,13 @@ namespace _58024_III_Projekt_5
                     {
                         disabled++;
                         // and if all of them are disabled, it's a draw
-                        if (disabled == 100)
-                        {
-                            MessageBox.Show("Brawo zuchy, zacięta to była batalia, ale wynik pozostaje nierozstrzygnięty!", "REMIS");
-                        }
+                        if (disabled == 100) ItIsADraw();
                     }
                 }
+            }
+            void ItIsADraw()
+            {
+                MessageBox.Show("Brawo zuchy, zacięta to była batalia, ale wynik pozostaje nierozstrzygnięty!", "REMIS");
             }
         }
         private void cls_btn_Click(object sender, EventArgs e)
@@ -235,7 +229,7 @@ namespace _58024_III_Projekt_5
             DialogResult exit = MessageBox.Show("Czy na pewno chcesz zakończyć?", "A może jeszcze partyjka...", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (exit == DialogResult.Yes)
             {
-                Close();
+                Application.Exit();
             }
             else
             {

@@ -20,3 +20,14 @@ C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_II
 C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Project_5\58024_III_Projekt_5\obj\Debug\58024_III_Projekt_5.exe
 C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Project_5\58024_III_Projekt_5\obj\Debug\58024_III_Projekt_5.pdb
 C:\Users\grzej\source\repos\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\_58024_III_Projekt_5.Form1.resources
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\bin\Debug\58024_III_Projekt_5.exe.config
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\bin\Debug\58024_III_Projekt_5.exe
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\bin\Debug\58024_III_Projekt_5.pdb
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\58024_III_Projekt_5.csproj.AssemblyReference.cache
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\58024_III_Projekt_5.csproj.SuggestedBindingRedirects.cache
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\_58024_III_Projekt_5.Form1.resources
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\_58024_III_Projekt_5.Properties.Resources.resources
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\58024_III_Projekt_5.csproj.GenerateResource.cache
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\58024_III_Projekt_5.csproj.CoreCompileInputs.cache
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\58024_III_Projekt_5.exe
+C:\Users\grzej\source\repos\Programowanie obiektowe\58024_III_Projekt_5\58024_III_Projekt_5\obj\Debug\58024_III_Projekt_5.pdb
